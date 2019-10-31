@@ -5,19 +5,20 @@
   
 
   
-  <title>Hello World | Colin‘s Blog</title>
+  <title>react进阶 | Colin‘s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="react原理1、JSX (传入) =&amp;gt; React.creatElement() =&amp;gt;（输出）ReactElement2、生命周期3、虚拟dom4、shouldComponentUpdate(nextProps, nextState):性能优化、定制5、setState是什么鬼：    对状态的更新是异步的（多次set，只render一次）    队列机制（pending队列 =&amp;g">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/08/26/hello-world/index.html">
+<meta property="og:title" content="react进阶">
+<meta property="og:url" content="http://yoursite.com/2019/01/23/react进阶/index.html">
 <meta property="og:site_name" content="Colin‘s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="react原理1、JSX (传入) =&amp;gt; React.creatElement() =&amp;gt;（输出）ReactElement2、生命周期3、虚拟dom4、shouldComponentUpdate(nextProps, nextState):性能优化、定制5、setState是什么鬼：    对状态的更新是异步的（多次set，只render一次）    队列机制（pending队列 =&amp;g">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-25T16:22:48.526Z">
+<meta property="og:updated_time" content="2019-01-27T14:02:29.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="react进阶">
+<meta name="twitter:description" content="react原理1、JSX (传入) =&amp;gt; React.creatElement() =&amp;gt;（输出）ReactElement2、生命周期3、虚拟dom4、shouldComponentUpdate(nextProps, nextState):性能优化、定制5、setState是什么鬼：    对状态的更新是异步的（多次set，只render一次）    队列机制（pending队列 =&amp;g">
   
     <link rel="alternate" href="/atom.xml" title="Colin‘s Blog" type="application/atom+xml">
   
@@ -64,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-react进阶" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/08/26/hello-world/" class="article-date">
-  <time datetime="2018-08-25T16:22:48.526Z" itemprop="datePublished">2018-08-26</time>
+    <a href="/2019/01/23/react进阶/" class="article-date">
+  <time datetime="2019-01-23T13:24:06.000Z" itemprop="datePublished">2019-01-23</time>
 </a>
     
   </div>
@@ -78,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      react进阶
     </h1>
   
 
@@ -86,37 +87,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h2 id="react原理"><a href="#react原理" class="headerlink" title="react原理"></a>react原理</h2><p>1、JSX (传入) =&gt; React.creatElement() =&gt;（输出）ReactElement<br>2、生命周期<br>3、虚拟dom<br>4、shouldComponentUpdate(nextProps, nextState):性能优化、定制<br>5、setState是什么鬼：<br>    对状态的更新是异步的（多次set，只render一次）<br>    队列机制（pending队列 =&gt; 队列更新 =&gt; update最高效）<br>    render中不要执行setState（因为setState会执行render）</p>
+<h2 id="redux-redux原理"><a href="#redux-redux原理" class="headerlink" title="redux-redux原理"></a>redux-redux原理</h2><pre><code>未完成
+</code></pre><h2 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h2><h3 id="React组件性能优化"><a href="#React组件性能优化" class="headerlink" title="React组件性能优化"></a>React组件性能优化</h3><p>1、属性传递优化<br>2、多组件优化<br>3、key<br>4、immutablejs的意义<br>   定义不可变的对象<br>   比较两个对象是否相等，复杂度较低<br>   react中的使用：shouldComponentUpdate比较对象<br>   seamless-immutable</p>
+<h3 id="Redux性能优化"><a href="#Redux性能优化" class="headerlink" title="Redux性能优化"></a>Redux性能优化</h3><p>1、reselect:缓存数据、减少重复计算<br>2、key属性：虚拟dom渲染中通过key来判断元素，从而提升效率</p>
+<h3 id="React同构"><a href="#React同构" class="headerlink" title="React同构"></a>React同构</h3><h2 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h2><h3 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h3><p>相关规范：airbnb</p>
+<h3 id="async、await优化代码"><a href="#async、await优化代码" class="headerlink" title="async、await优化代码"></a>async、await优化代码</h3><p>历史：<br>1、call back （call back hell）<br>2、promise<br>3、async、await配合使用（ES7）</p>
+<h3 id="React动画解决方案"><a href="#React动画解决方案" class="headerlink" title="React动画解决方案"></a>React动画解决方案</h3><p>ReactCSSTransitionGroup<br>Ant Motion</p>
+<h3 id="项目打包编译"><a href="#项目打包编译" class="headerlink" title="项目打包编译"></a>项目打包编译</h3><h3 id="React-SSR"><a href="#React-SSR" class="headerlink" title="React SSR"></a>React SSR</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/26/hello-world/" data-id="cjrlqo3ar000464ztdtsupuqo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/23/react进阶/" data-id="cjrlqo3am000364ztp7esbogm" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/11/04/Redux基础原理与实例/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/27/项目总结/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Redux基础原理与实例
+          项目总结
         
       </div>
     </a>
   
+  
+    <a href="/2018/11/04/Redux基础原理与实例/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redux基础原理与实例</div>
+    </a>
   
 </nav>
 
