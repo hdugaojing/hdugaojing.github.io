@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JS专题1-从作用域到执行上下文 | Colin‘s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="作用域1、作用域是指程序源代码中定义变量的区域。 2、作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。 3、JavaScript采用词法作用域(lexical scoping)，也就是静态作用域。 4、因为JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。 5、JavaScript函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。 说了这">
+<meta name="keywords" content="JS基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS专题1-从作用域到执行上下文">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/JS专题1-从作用域到执行上下文/index.html">
+<meta property="og:site_name" content="Colin‘s Blog">
+<meta property="og:description" content="作用域1、作用域是指程序源代码中定义变量的区域。 2、作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。 3、JavaScript采用词法作用域(lexical scoping)，也就是静态作用域。 4、因为JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。 5、JavaScript函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。 说了这">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-11-03T05:31:02.245Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS专题1-从作用域到执行上下文">
+<meta name="twitter:description" content="作用域1、作用域是指程序源代码中定义变量的区域。 2、作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。 3、JavaScript采用词法作用域(lexical scoping)，也就是静态作用域。 4、因为JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。 5、JavaScript函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。 说了这">
+  
+    <link rel="alternate" href="/atom.xml" title="Colin‘s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Colin‘s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS专题1-从作用域到执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/31/JS专题1-从作用域到执行上下文/" class="article-date">
+  <time datetime="2019-05-31T15:14:29.000Z" itemprop="datePublished">2019-05-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS专题1-从作用域到执行上下文
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>1、<strong>作用域</strong>是指程序源代码中定义变量的区域。</p>
+<p>2、作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。</p>
+<p>3、JavaScript采用词法作用域(lexical scoping)，也就是<strong>静态作用域</strong>。</p>
+<p>4、因为JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。</p>
+<p>5、JavaScript函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。</p>
+<p>说了这么多，举个栗子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br><span class="line">bar();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    执行foo函数，先从foo函数内部查找是否有局部变量value;</span></span><br><span class="line"><span class="comment">    如果没有，就根据书写的位置，查找上面一层的代码，也就是value等于1;</span></span><br><span class="line"><span class="comment">    所以结果会打印1。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/31/JS专题1-从作用域到执行上下文/" data-id="ck2ik56qv0000pgztgk0iz4kr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS基础/">JS基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/03/nextjs/nextJS项目笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nextJS项目笔记1——项目搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/04/Redux基础原理与实例/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redux基础原理与实例</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS基础/">JS基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NextJS/">NextJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JS基础/" style="font-size: 10px;">JS基础</a> <a href="/tags/NextJS/" style="font-size: 10px;">NextJS</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/03/nextjs/nextJS项目笔记/">nextJS项目笔记1——项目搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/31/JS专题1-从作用域到执行上下文/">JS专题1-从作用域到执行上下文</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/04/Redux基础原理与实例/">Redux基础原理与实例</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Colin Gao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
