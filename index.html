@@ -62,6 +62,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-nextjs/nextJS项目笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/03/nextjs/nextJS项目笔记/" class="article-date">
+  <time datetime="2019-11-03T02:11:01.000Z" itemprop="datePublished">2019-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/nextjs/nextJS项目笔记/">nextJS项目笔记1——项目搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="模块版本"><a href="#模块版本" class="headerlink" title="模块版本"></a>模块版本</h3><p>大版本更新可能导致API变更<br>不同版本可能出现一些无法预期的bug<br>“antd”: “^3.15.2”，其中^表示自动安装当前大版本号下的最新</p>
+<h3 id="创建nextJS项目"><a href="#创建nextJS项目" class="headerlink" title="创建nextJS项目"></a>创建nextJS项目</h3><p>手动创建：react、react-dom、next<br>create-next-app</p>
+<h3 id="nextjs作为koa的中间件使用"><a href="#nextjs作为koa的中间件使用" class="headerlink" title="nextjs作为koa的中间件使用"></a>nextjs作为koa的中间件使用</h3><p>nextjs自身带有服务器，但是只能处理SSR渲染<br>还需要服务器处理http请求，根据请求数据返回相应的内容<br>nextjs无法处理服务端：数据接口、数据库连接、session状态</p>
+<h3 id="why-choose-koa"><a href="#why-choose-koa" class="headerlink" title="why choose koa"></a>why choose koa</h3><p>项目相对轻量：本身并不封装什么功能<br>易于扩展，编程模式符合js特性<br>api：app.user/ctx/request、response、req、res<br>手写一个koa中间件:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server.use(<span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 可以通过ctx获得请求内容相关的东西</span></span><br><span class="line">    <span class="keyword">const</span> path = ctx.path</span><br><span class="line">    <span class="keyword">const</span> method = ctx.method</span><br><span class="line">    ctx.body = <span class="string">`&lt;span&gt;KOA RENDER <span class="subst">$&#123;method&#125;</span> <span class="subst">$&#123;path&#125;</span> &lt;/span&gt;`</span></span><br><span class="line">    <span class="comment">// 执行下一个中间件</span></span><br><span class="line">    <span class="keyword">await</span> next()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="redis数据库"><a href="#redis数据库" class="headerlink" title="redis数据库"></a>redis数据库</h3><p>内存数据结构存储<br>可持久存储<br>支持多种数据结构<br>项目中使用ioredis处理node和redis的连接<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> Redis = <span class="built_in">require</span>(<span class="string">'ioredis'</span>)</span><br><span class="line">    <span class="keyword">const</span> redis = <span class="keyword">new</span> Redis(&#123;</span><br><span class="line">        port: <span class="number">6379</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">await</span> redis.set(<span class="string">'c'</span>, <span class="number">123</span>);</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="keyword">await</span> redis.keys(<span class="string">'*'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(keys);</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure></p>
+<h3 id="集成antd"><a href="#集成antd" class="headerlink" title="集成antd"></a>集成antd</h3><p>问题：<br>1、nextjs默认不支持css文件——@zeit/next-css<br>2、babel-plugin-import 实现antd组件按需加载,babel配置如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"plugins"</span>: [</span><br><span class="line">        [</span><br><span class="line">            <span class="string">"import"</span>,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">"libraryName"</span>: <span class="string">"antd"</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure></p>
+<p>3、引入antd全局样式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'next/app'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'antd/dist/antd.css'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/03/nextjs/nextJS项目笔记/" data-id="ck2ifzu3l0005zezt37s40u4p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JS专题1-从作用域到执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/31/JS专题1-从作用域到执行上下文/" class="article-date">
@@ -94,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/31/JS专题1-从作用域到执行上下文/" data-id="ck2evptzp0000s6zt3rpdzbub" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/31/JS专题1-从作用域到执行上下文/" data-id="ck2id0s4q0000zezt9iv4we0m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/04/Redux基础原理与实例/" data-id="ck2evptzu0001s6zttzpcgfds" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/11/04/Redux基础原理与实例/" data-id="ck2id0s4w0001zezt16pr0vyh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux-react-redux/">redux react-redux</a></li></ul>
@@ -199,7 +242,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
     </div>
   </div>
 
@@ -210,6 +253,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/11/03/nextjs/nextJS项目笔记/">nextJS项目笔记1——项目搭建</a>
+          </li>
         
           <li>
             <a href="/2019/10/31/JS专题1-从作用域到执行上下文/">JS专题1-从作用域到执行上下文</a>
