@@ -5,21 +5,22 @@
   
 
   
-  <title>Colin‘s Blog</title>
+  <title>React生命周期 | Colin‘s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: React生命周期date: 2020-04-04tags: React—​俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 Class组件的声明周期React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了">
+  <meta name="description" content="Class组件的声明周期俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了删除线的生命周期在16.3之后已移除. Initialization初始化1、constru">
+<meta name="keywords" content="React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Colin‘s Blog">
+<meta property="og:title" content="React生命周期">
 <meta property="og:url" content="http://yoursite.com/2020/04/04/React/React之Class组件生命周期与Hook对比/index.html">
 <meta property="og:site_name" content="Colin‘s Blog">
-<meta property="og:description" content="title: React生命周期date: 2020-04-04tags: React—​俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 Class组件的声明周期React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了">
+<meta property="og:description" content="Class组件的声明周期俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了删除线的生命周期在16.3之后已移除. Initialization初始化1、constru">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/React/image/lifecycle16.3.png">
 <meta property="og:image" content="http://yoursite.com/2020/04/04/React/image/lifecycle16.4.png">
-<meta property="og:updated_time" content="2020-04-04T16:46:39.109Z">
+<meta property="og:updated_time" content="2020-04-04T16:51:35.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Colin‘s Blog">
-<meta name="twitter:description" content="title: React生命周期date: 2020-04-04tags: React—​俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 Class组件的声明周期React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了">
+<meta name="twitter:title" content="React生命周期">
+<meta name="twitter:description" content="Class组件的声明周期俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。 React16.3之前的生命周期 可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。 加了删除线的生命周期在16.3之后已移除. Initialization初始化1、constru">
 <meta name="twitter:image" content="http://yoursite.com/2020/04/04/React/image/lifecycle16.3.png">
   
     <link rel="alternate" href="/atom.xml" title="Colin‘s Blog" type="application/atom+xml">
@@ -70,18 +71,27 @@
         <section id="main"><article id="post-React/React之Class组件生命周期与Hook对比" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/04/React/React之Class组件生命周期与Hook对比/" class="article-date">
-  <time datetime="2020-04-04T13:30:50.537Z" itemprop="datePublished">2020-04-04</time>
+  <time datetime="2020-04-03T16:00:00.000Z" itemprop="datePublished">2020-04-04</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React生命周期
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: React生命周期<br>date: 2020-04-04<br>tags: React<br>—​<br>俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。</p>
-<h2 id="Class组件的声明周期"><a href="#Class组件的声明周期" class="headerlink" title="Class组件的声明周期"></a>Class组件的声明周期</h2><h3 id="React16-3之前的生命周期"><a href="#React16-3之前的生命周期" class="headerlink" title="React16.3之前的生命周期"></a>React16.3之前的生命周期</h3><p><img src="../image/lifecycle16.3.png" alt></p>
+        <h2 id="Class组件的声明周期"><a href="#Class组件的声明周期" class="headerlink" title="Class组件的声明周期"></a>Class组件的声明周期</h2><p>俗话说，温故而知新。虽说目前很多数人提倡全面拥抱Hook，在拥抱之前不如再复习下class组件的声明周期。</p>
+<h3 id="React16-3之前的生命周期"><a href="#React16-3之前的生命周期" class="headerlink" title="React16.3之前的生命周期"></a>React16.3之前的生命周期</h3><p><img src="../image/lifecycle16.3.png" alt></p>
 <p>可以看到生命周期分为4个阶段：Initialization初始化、Mounting挂载、Updation更新、Unmounting卸载。</p>
 <p>加了删除线的生命周期在16.3之后已移除.</p>
 <h4 id="Initialization初始化"><a href="#Initialization初始化" class="headerlink" title="Initialization初始化"></a><strong>Initialization初始化</strong></h4><p><strong>1、constructor(props)</strong></p>
@@ -159,9 +169,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/04/React/React之Class组件生命周期与Hook对比/" data-id="ck8lupfpp000174ztdbbihd54" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/04/React/React之Class组件生命周期与Hook对比/" data-id="ck8lutt6t0000d6ztkl8slh53" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
     </footer>
   </div>
   
@@ -190,7 +202,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
     </div>
   </div>
 
@@ -200,7 +212,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a>
+      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Redux/" style="font-size: 10px;">Redux</a>
     </div>
   </div>
 
@@ -222,7 +234,7 @@
       <ul>
         
           <li>
-            <a href="/2020/04/04/React/React之Class组件生命周期与Hook对比/">(no title)</a>
+            <a href="/2020/04/04/React/React之Class组件生命周期与Hook对比/">React生命周期</a>
           </li>
         
           <li>
